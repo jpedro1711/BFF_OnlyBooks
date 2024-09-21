@@ -26,14 +26,9 @@ builder.Services.AddRefitClient<IEmprestimoApi>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://emprestimosfunctionapp.azurewebsites.net/api"));
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseAuthorization();
 
