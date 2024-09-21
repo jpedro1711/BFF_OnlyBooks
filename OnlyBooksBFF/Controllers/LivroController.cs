@@ -48,8 +48,8 @@ namespace OnlyBooksBFF.Controllers
             return StatusCode((int)response.StatusCode, response.ReasonPhrase);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> RemoverLivro(int id)
+        [HttpDelete]
+        public async Task<IActionResult> RemoverLivro([FromQuery] int id)
         {
             var response = await _livroApi.RemoverLivro(id);
             if (response.IsSuccessStatusCode)
@@ -59,7 +59,6 @@ namespace OnlyBooksBFF.Controllers
             return StatusCode((int)response.StatusCode, response.ReasonPhrase);
         }
 
-        // TODO: Review
         [HttpPut("{id}")]
         public async Task<ActionResult<LivroResponseDto>> AtualizarLivro(int id, [FromBody] LivroDto livro)
         {

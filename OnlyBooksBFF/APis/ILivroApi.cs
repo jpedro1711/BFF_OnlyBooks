@@ -16,8 +16,8 @@ namespace OnlyBooksBFF.APis
         [Post("/Livro")]
         Task<ApiResponse<LivroResponseDto>> CriarLivro([Body] CreateLivroDto livro);
 
-        [Delete("/Livro/{id}")]
-        Task<ApiResponse<object>> RemoverLivro(int id);
+        [Delete("/Livro")]
+        Task<ApiResponse<object>> RemoverLivro([Query] int id);
 
         [Put("/Livro/{id}")]
         Task<ApiResponse<LivroResponseDto>> AtualizarLivro(int id, [Body] LivroDto livro);

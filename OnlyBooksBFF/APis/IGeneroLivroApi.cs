@@ -11,9 +11,9 @@ namespace OnlyBooksBFF.APis
         Task<ApiResponse<GeneroLivroResponseDto>> BuscarGenero(int id);
         [Post("/GeneroLivro")]
         Task<ApiResponse<GeneroLivroResponseDto>> CriarGenero([Body] GeneroLivroDto generoLivro);
-        [Delete("/GeneroLivro/{id}")]
-        Task<ApiResponse<object>> RemoverGeneroLivro(int id);
-        [Put("/Livro/{id}")]
+        [Put("/GeneroLivro/{id}")]
         Task<ApiResponse<GeneroLivroResponseDto>> AtualizarGeneroLivro(int id, [Body] GeneroLivroDto livro);
+        [Delete("/GeneroLivro")]
+        Task<ApiResponse<object>> RemoverGeneroLivro([Query] int id);
     }
 }

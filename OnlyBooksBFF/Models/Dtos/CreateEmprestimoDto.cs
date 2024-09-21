@@ -6,6 +6,5 @@ namespace OnlyBooksApi.Models.Dtos
     {
         public int ReservaId { get; set; }
         public DateTime DataDevolucao { get; set; }
-        public StatusEmprestimo StatusEmprestimo { get; set; }
     }
 }

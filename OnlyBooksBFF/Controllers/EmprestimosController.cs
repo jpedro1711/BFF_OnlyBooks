@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using OnlyBooksApi.Models.Dtos;
 using OnlyBooksApi.Models.Enums;
 using OnlyBooksBFF.APis;
 
@@ -42,9 +43,9 @@ namespace OnlyBooksBFF.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<object>> CreateEmprestimo()
+        public async Task<ActionResult<object>> CreateEmprestimo([FromBody] CreateEmprestimoDto dto)
         {
-            var result = await _api.CreateEmprestimo(azureFunctionHostKey);
+            var result = await _api.CreateEmprestimo(dto, azureFunctionHostKey);
 
             if (result.IsSuccessStatusCode)
             {
@@ -53,8 +54,8 @@ namespace OnlyBooksBFF.Controllers
             return StatusCode((int)result.StatusCode, result.ReasonPhrase);
         }
 
-        [HttpPatch]
-        public async Task<ActionResult<object>> UpdateStatusEmprestimo([FromQuery] string id, [FromQuery] string status)
+        [HttpPatch("{id}/{status}")]
+        public async Task<ActionResult<object>> UpdateStatusEmprestimo(string id, string status)
         {
             var response = await _api.UpdateStatus(id, status, azureFunctionHostKey);
             if (response.IsSuccessStatusCode)

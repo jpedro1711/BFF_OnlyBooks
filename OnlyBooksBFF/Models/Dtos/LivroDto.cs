@@ -7,7 +7,7 @@ namespace OnlyBooksApi.Models.Dtos
     {
         public string Titulo { get; set; }
         public string Autor { get; set; }
-        public StatusLivro? Status { get; set; } = StatusLivro.Disponivel;
+        public int? Status { get; set; }
         public double NotaAvaliacao { get; set; } = 0;
         public int totalAvaliações { get; set; } = 0;
         public int GeneroLivroId { get; set; }

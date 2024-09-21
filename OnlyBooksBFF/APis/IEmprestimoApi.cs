@@ -12,9 +12,9 @@ namespace OnlyBooksBFF.APis
         [Get("/Emprestimos/{id}")]
         Task<ApiResponse<object>> GetEmprestimoById([AliasAs("id")] string emprestimoId, [Query] string code);
         [Post("/CreateEmprestimo")]
-        Task<ApiResponse<object>> CreateEmprestimo([Query] string code);
+        Task<ApiResponse<object>> CreateEmprestimo([Body] CreateEmprestimoDto createEmprestimoDto,[Query] string code);
         [Patch("/Emprestimos/{id}/{status}")]
-        Task<ApiResponse<object>> UpdateStatus([AliasAs("id")] string emprestimoId, [Query] string status, [Query] string code);
+        Task<ApiResponse<object>> UpdateStatus(string id, string status, [Query] string code);
         [Delete("/Emprestimos/{id}")]
         Task<ApiResponse<object>> RemoverEmprestimo([AliasAs("id")] string emprestimoId, [Query] string code);
     }

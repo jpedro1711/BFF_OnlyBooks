@@ -38,7 +38,7 @@ namespace OnlyBooksBFF.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UsuarioResponseDto>> CriarLivro([FromBody] CreateOrUpdateUsuarioDto usuarioDto)
+        public async Task<ActionResult> CriarUsuario([FromBody] CreateOrUpdateUsuarioDto usuarioDto)
         {
             var response = await _api.CriarUsuario(usuarioDto);
             if (response.IsSuccessStatusCode)
@@ -48,7 +48,6 @@ namespace OnlyBooksBFF.Controllers
             return StatusCode((int)response.StatusCode, response.ReasonPhrase);
         }
 
-        // TODO: Rever
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoverUsuario(int id)
         {
@@ -60,11 +59,10 @@ namespace OnlyBooksBFF.Controllers
             return StatusCode((int)response.StatusCode, response.ReasonPhrase);
         }
 
-        // TODO: Rever
         [HttpPut("{id}")]
-        public async Task<ActionResult<CreateOrUpdateUsuarioDto>> AtualizarUsuario(int id, [FromBody] CreateOrUpdateUsuarioDto livro)
+        public async Task<ActionResult<CreateOrUpdateUsuarioDto>> AtualizarUsuario(int id, [FromBody] CreateOrUpdateUsuarioDto usuario)
         {
-            var response = await _api.AtualizarUsuario(id, livro);
+            var response = await _api.AtualizarUsuario(id, usuario);
             if (response.IsSuccessStatusCode)
             {
                 return Ok(response.Content);
