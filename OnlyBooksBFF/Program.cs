@@ -24,6 +24,9 @@ builder.Services.AddRefitClient<IUsuarioApi>()
 
 builder.Services.AddRefitClient<IEmprestimoApi>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://emprestimosfunctionapp.azurewebsites.net/api"));
+
+builder.Services.AddRefitClient<ICreateEmprestimoAsyncApi>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://onlybookscontainerapp.yellowocean-3bc779a1.northeurope.azurecontainerapps.io/"));
 var app = builder.Build();
 
 

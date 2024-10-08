@@ -16,14 +16,16 @@ namespace OnlyBooksBFF.Controllers
     public class EmprestimosController : ControllerBase
     {
         private readonly IEmprestimoApi _api;
+        private readonly ICreateEmprestimoAsyncApi _createEmprestimoApi;
         private readonly IReservaApi _reservaApi;
         private string azureFunctionHostKey;
 
-        public EmprestimosController(IEmprestimoApi api, IConfiguration configuration, IReservaApi reservaApi)
+        public EmprestimosController(IEmprestimoApi api, IConfiguration configuration, IReservaApi reservaApi, ICreateEmprestimoAsyncApi createEmprestimoApi)
         {
             _api = api;
             _reservaApi = reservaApi;
             azureFunctionHostKey = configuration["AzureFunction:HostKey"];
+            _createEmprestimoApi = createEmprestimoApi;
         }
 
         [HttpGet]
@@ -93,11 +95,11 @@ namespace OnlyBooksBFF.Controllers
         [HttpPost]
         public async Task<ActionResult<EmprestimoResponse>> CreateEmprestimo([FromBody] CreateEmprestimoDto dto)
         {
-            var result = await _api.CreateEmprestimo(dto, azureFunctionHostKey);
+            var result = await _createEmprestimoApi.CreateEmprestimo(dto);
 
             if (result.IsSuccessStatusCode)
             {
-                return CreatedAtAction(nameof(GetEmprestimoById), new { id = result.Content }, result.Content);
+                return Ok("Sua requisição está sendo processada");
             }
             return StatusCode((int)result.StatusCode, result.ReasonPhrase);
         }
