@@ -10,6 +10,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddRefitClient<ILivroApi>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://onlybookscontainerapp.yellowocean-3bc779a1.northeurope.azurecontainerapps.io/"));
 
@@ -32,6 +42,8 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 
